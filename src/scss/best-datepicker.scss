@@ -1,0 +1,289 @@
+/*
+ * best-datepicker
+ * @author : chenyangdamon
+ * @email  : 645230634@qq.com
+ * @github : https://github.com/chenyangdamon
+ * @Date   : 2017-02-28 22:08:02
+ */
+
+$datepicker-theme: #F10215;
+// $datepicker-theme: $color-theme;
+//日历宽度
+$datepicker-width: 240px;
+//是否有圆角
+$datepicker-is-radius: false;
+//圆角大小
+$datepicker-radius: 3px;
+//--------------------------------------------------------------------------------------
+.best-datepicker {
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    width: $datepicker-width;
+    background-color: #FFFFFF;
+    &-default {
+        @at-root {
+            /*头部*/
+        }
+        &-header {
+            height: 34px;
+            line-height: 34px;
+            background-color: $datepicker-theme;
+            text-align: center;
+            color: #FFFFFF; // 占位符选择器
+            %L {
+                position: relative;
+                float: left;
+                width: 20px;
+                height: 100%;
+                cursor: pointer;
+            } // 占位符选择器
+            %cfxL {
+                position: absolute;
+                right: 0;
+                top: 9px;
+                display: block;
+                content: "";
+                border-right: 8px solid #e2e2e2;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                &:hover {
+                    border-right-color: #FFFFFF;
+                }
+            }
+            .arrow-left-year {
+                @extend %L;
+                &:after {
+                    @extend %cfxL;
+                    right: 0;
+                }
+            }
+            .arrow-left-month {
+                @extend %L;
+                &:after {
+                    @extend %cfxL;
+                    right: 0px;
+                }
+                &:before {
+                    @extend %cfxL;
+                    right: 5px;
+                }
+            }
+            .time-date {
+                margin: 0 34px;
+                line-height: 34px;
+                span {
+                    display: inline-block;
+                    cursor: pointer;
+                    font: {
+                        size: 13px;
+                    }
+                    i {
+                        margin: 0 3px;
+                    }
+                }
+            } // 占位符选择器
+            %R {
+                position: relative;
+                float: right;
+                width: 17px;
+                height: 100%;
+                cursor: pointer;
+            } // 占位符选择器
+            %cfxR {
+                position: absolute;
+                left: 0px;
+                top: 9px;
+                display: block;
+                content: "";
+                border-left: 8px solid #e2e2e2;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                &:hover {
+                    border-left-color: #FFFFFF;
+                }
+            }
+            .arrow-right-year {
+                @extend %R;
+                &:after {
+                    @extend %cfxR;
+                    left: 0px;
+                }
+            }
+            .arrow-right-month {
+                @extend %R;
+                &:after {
+                    @extend %cfxR;
+                    left: 0px;
+                }
+                &:before {
+                    @extend %cfxR;
+                    left: 4px;
+                }
+            }
+        }
+        @at-root {
+            /*内容*/
+        }
+        &-body {
+            border: 1px solid $datepicker-theme;
+            table {
+                width: 100%;
+                text-align: center;
+                border-collapse: collapse;
+                border-spacing: 0;
+                thead {
+                    td {
+                        padding: 4px 0;
+                        font-size: 14px;
+                        border-bottom: 1px solid $datepicker-theme;
+                        background-color: lighten($datepicker-theme, 60%);
+                        color: $datepicker-theme;
+                        font-size: 12px;
+                    }
+                }
+                tbody {
+                    td {
+                        padding: 6px 0;
+                        color: #ababab;
+                        cursor: pointer;
+                        font-size: 14px;
+                        @if ($datepicker-is-radius) {
+                            border-radius: $datepicker-radius;
+                        }
+                        &:hover {
+                            background-color: lighten($datepicker-theme, 38%);
+                            color: #000000;
+                        }
+                        @at-root {
+                            /*当前月份*/
+                        }
+                        &.best-datepicker-cur {
+                            color: #000000;
+                            &.active {
+                                color: #FFFFFF;
+                                background-color: $datepicker-theme;
+                            }
+                        }
+                        @at-root {
+                            /*禁用状态-在区间范围内选择时有用*/
+                        }
+                        &.disabled {
+                            cursor: not-allowed;
+                            background-color: #f4f5f5 !important;
+                            color: #ddd !important;
+                        }
+                    }
+                }
+            }
+            @at-root {
+                /*底部*/
+            }
+            .bar {
+                padding: 8px;
+                height: 22px;
+                border-top: 1px solid $datepicker-theme;
+                background-color: lighten(#111111, 92%);
+                span {
+                    float: right;
+                    display: inline-block;
+                    margin-left: 8px;
+                    padding: 0 15px;
+                    height: 22px;
+                    line-height: 22px;
+                    border: 1px solid $datepicker-theme;
+                    font-size: 12px;
+                    background-color: $datepicker-theme;
+                    color: #fff;
+                    cursor: pointer;
+                    &:hover {
+                        color: $datepicker-theme;
+                        background-color: #fff;
+                    }
+                }
+            }
+        }
+    }
+    @at-root {
+        /*年份、月份*/
+    }
+    &-panel {
+        display: none;
+        background-color: #FFF;
+        &-header {
+            height: 34px;
+            line-height: 34px;
+            background-color: $datepicker-theme;
+            text-align: center;
+            color: #FFFFFF;
+            .arrow-left {
+                position: relative;
+                float: left;
+                width: 17px;
+                height: 100%;
+                cursor: pointer;
+                &:after {
+                    position: absolute;
+                    right: 0;
+                    top: 9px;
+                    display: block;
+                    content: "";
+                    border-right: 8px solid #FFFFFF;
+                    border-top: 8px solid transparent;
+                    border-bottom: 8px solid transparent;
+                }
+            }
+            .time-date {
+                margin: 0 34px;
+                span {
+                    display: inline-block;
+                    margin: 0 2px;
+                    font: {
+                        size: 13px;
+                    }
+                    cursor: pointer;
+                    i {
+                        margin: 0 1px;
+                    }
+                }
+            }
+            .arrow-right {
+                position: relative;
+                float: right;
+                width: 17px;
+                height: 100%;
+                cursor: pointer;
+                &:after {
+                    position: absolute;
+                    left: 0px;
+                    top: 9px;
+                    display: block;
+                    content: "";
+                    border-left: 8px solid #FFFFFF;
+                    border-top: 8px solid transparent;
+                    border-bottom: 8px solid transparent;
+                }
+            }
+        }
+        &-body {
+            border: 1px solid $datepicker-theme;
+            overflow: hidden;
+            span {
+                float: left;
+                width: 33.333333333333%;
+                height: 32px;
+                line-height: 32px;
+                text-align: center;
+                cursor: pointer;
+                &:hover {
+                    background-color: #e2e2e2;
+                    color: #000;
+                }
+                &.active {
+                    background-color: $datepicker-theme;
+                    color: #FFFFFF;
+                }
+            }
+        }
+    }
+}
