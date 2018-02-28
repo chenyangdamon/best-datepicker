@@ -440,11 +440,7 @@
                 _this.VgDatepicker.remove();
                 delete _this.VgDatepicker;
             });
-
-
         },
-
-
         /**
          * 渲染日历
          */
@@ -504,10 +500,7 @@
              * 保存当前日历组件对象
              * */
             _this.VgDatepicker = $(".best-datepicker");
-
         },
-
-
         /**
          * 显示年份或月份列表
          * @param type
@@ -533,7 +526,6 @@
             $(".best-datepicker-panel").html(html);
         },
 
-
         /**
          * 加载年份列表数据
          * @param centerYear
@@ -557,8 +549,6 @@
             array.push("</div>");
 
             return array.join("");
-
-
         },
 
 
@@ -660,7 +650,6 @@
             return new Date(date.getTime() - 1000 * 60 * 60 * 24);
 
         },
-
 
         /**
          * 获取某个月的日历数据
