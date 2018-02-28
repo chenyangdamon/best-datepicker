@@ -412,7 +412,7 @@
                  * */
                 if ($(this).hasClass("disabled")) return;
 
-                if (bValid) {
+                if (_this.option.bValid) {
                     _this.curActiveInput.val($(this).data("val")).valid();
                 } else {
                     _this.curActiveInput.val($(this).data("val"))
@@ -427,7 +427,7 @@
             $(".best-datepicker").on("click", ".today", function(ev) {
                 ev.stopPropagation();
 
-                if (bValid) {
+                if (_this.option.bValid) {
                     _this.curActiveInput.val(_this.format(new Date)).valid();
                 } else {
                     _this.curActiveInput.val(_this.format(new Date));
