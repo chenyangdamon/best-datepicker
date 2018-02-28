@@ -34,6 +34,10 @@
             format: "yyyy-mm-dd hh:mm:ss",
 
             width: "240",
+             /*
+             * 是否支持jquery.validate校验
+             * */
+            bValid: false,
 
             /*
              * 底部bar
@@ -69,12 +73,6 @@
             var _this = this;
 
             _this.option = $.extend({}, _this.defaultOption, userOption);
-
-            // $(_this.option.selector).css({
-            //     "background-image": "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAASCAYAAABM8m7ZAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NkFGOTY3MEREMTAyMTFFN0JEN0RBRkNERkEyM0ZEQ0EiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NkFGOTY3MEVEMTAyMTFFN0JEN0RBRkNERkEyM0ZEQ0EiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2QUY5NjcwQkQxMDIxMUU3QkQ3REFGQ0RGQTIzRkRDQSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2QUY5NjcwQ0QxMDIxMUU3QkQ3REFGQ0RGQTIzRkRDQSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PoNdd6wAAACgSURBVHjaYmRAAvrLHvwH0RejFBgZ8ABs6v7//89ACmBiGCDACHM9peBCpDwjKepZkIOM3KAmx/EDFtQsyBxePkYhYjQRq45oi4/4yL8nRhOx6oi2GDmuQPGHzsemhlyLMeIY3TBshlNiIU6L0VMothRLlSxIDUNAZoBKLlLw4MhOxCQuagGyEhdNLCYmcVE9qOnl24Evq2kVnPgAQIABAKrjdlFUeiePAAAAAElFTkSuQmCC)",
-            //     "background-repeat": "no-repeat",
-            //     "background-position": "right center"
-            // })
 
             $(_this.option.selector).click(function(ev) {
                 ev.stopPropagation();
@@ -414,7 +412,11 @@
                  * */
                 if ($(this).hasClass("disabled")) return;
 
-                _this.curActiveInput.val($(this).data("val")).valid();
+                if (bValid) {
+                    _this.curActiveInput.val($(this).data("val")).valid();
+                } else {
+                    _this.curActiveInput.val($(this).data("val"))
+                }
                 _this.VgDatepicker.remove();
                 delete _this.VgDatepicker;
             });
@@ -424,7 +426,12 @@
              * */
             $(".best-datepicker").on("click", ".today", function(ev) {
                 ev.stopPropagation();
-                _this.curActiveInput.val(_this.format(new Date)).valid();
+
+                if (bValid) {
+                    _this.curActiveInput.val(_this.format(new Date)).valid();
+                } else {
+                    _this.curActiveInput.val(_this.format(new Date));
+                }
                 _this.VgDatepicker.remove();
                 delete _this.VgDatepicker;
             });
@@ -440,7 +447,11 @@
                 _this.VgDatepicker.remove();
                 delete _this.VgDatepicker;
             });
+
+
         },
+
+
         /**
          * 渲染日历
          */
@@ -500,7 +511,10 @@
              * 保存当前日历组件对象
              * */
             _this.VgDatepicker = $(".best-datepicker");
+
         },
+
+
         /**
          * 显示年份或月份列表
          * @param type
@@ -526,6 +540,7 @@
             $(".best-datepicker-panel").html(html);
         },
 
+
         /**
          * 加载年份列表数据
          * @param centerYear
@@ -549,6 +564,8 @@
             array.push("</div>");
 
             return array.join("");
+
+
         },
 
 
@@ -650,6 +667,7 @@
             return new Date(date.getTime() - 1000 * 60 * 60 * 24);
 
         },
+
 
         /**
          * 获取某个月的日历数据

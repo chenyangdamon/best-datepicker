@@ -19,7 +19,7 @@ index.js
 $(function(){
   
   // 实例化Datepicker
-  var datepicker=new datepicker(options);
+  var datepicker=new Datepicker(options);
   
 });
 </script>
@@ -28,8 +28,9 @@ $(function(){
 ## 配置项
 |属性|说明|默认值|字段类型|
 |:---|---|---|---|
-| `selector`||`$("body")`|`Object`|
+| `selector`|触发事件DOM|`".best-datepicker-input",`|`String`|
 | `format`|格式化 2020-10-21 13:30:12|`"yyyy-mm-dd hh:mm:ss"`|`String`|
 | `width`|组件宽度|'240'|`String`|
+| `bValid`|是否支持jquery.validate校验|'false'|`Boolean`|
 | `showBar`|是否显示底部bar|`true`|`Boolean`|
 | `range`|区间范围选择|`true`|`String`|
